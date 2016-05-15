@@ -88,6 +88,8 @@ class _ExifReader(object):
 
     def get_ifd_dict(self, pointer, ifd_name, read_unknown=False):
         ifd_dict = {}
+        if pointer + 2 > len(self.tiftag):
+            return ifd_dict
         tag_count = struct.unpack(self.endian_mark + "H",
                                   self.tiftag[pointer: pointer+2])[0]
         offset = pointer + 2
